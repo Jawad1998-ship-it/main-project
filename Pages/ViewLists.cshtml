@@ -1,0 +1,115 @@
+﻿@page
+@model Donation_Website.Pages.ViewListsModel
+@{
+    ViewData["Title"] = "View Lists";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-3">View Lists</h2>
+    <p class="text-muted">View volunteer, organization, and event lists.</p>
+
+    <!-- Buttons -->
+    <div class="mb-4">
+        <button class="btn btn-primary me-2" onclick="showTable('volunteers')">Volunteers</button>
+        <button class="btn btn-success me-2" onclick="showTable('organizations')">Organizations</button>
+        <button class="btn btn-danger" onclick="showTable('events')">Events</button>
+    </div>
+
+    <!-- Volunteers Table -->
+    <div id="volunteers" class="table-container">
+        <h4 class="text-primary">Volunteers</h4>
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Skill</th>
+                    <th>Availability</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var v in Model.Volunteers)
+                {
+                    <tr>
+                        <td>@v.Name</td>
+                        <td>@v.Email</td>
+                        <td>@v.Phone</td>
+                        <td>@v.Address</td>
+                        <td>@v.Skill</td>
+                        <td>@v.Availability</td>
+                        <td class="@v.StatusClass fw-bold">@v.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Organizations Table -->
+    <div id="organizations" class="table-container d-none">
+        <h4 class="text-success">Organizations</h4>
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var org in Model.Organizations)
+                {
+                    <tr>
+                        <td>@org.Name</td>
+                        <td>@org.Email</td>
+                        <td>@org.Phone</td>
+                        <td>@org.Address</td>
+                        <td class="fw-bold">@org.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Events Table -->
+    <div id="events" class="table-container d-none">
+        <h4 class="text-danger">Events</h4>
+        <table class="table table-bordered table-striped text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var e in Model.Events)
+                {
+                    <tr>
+                        <td>@e.Name</td>
+                        <td>@e.Location</td>
+                        <td>@e.EventDate.ToString("yyyy-MM-dd")</td>
+                        <td class="fw-bold">@e.Status</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showTable(id) {
+            document.querySelectorAll('.table-container').forEach(div => div.classList.add('d-none'));
+            document.getElementById(id).classList.remove('d-none');
+        }
+
+        // Default: show volunteers
+        showTable('volunteers');
+    </script>
+}

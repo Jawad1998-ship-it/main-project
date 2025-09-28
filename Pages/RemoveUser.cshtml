@@ -1,0 +1,58 @@
+﻿@page
+@model Donation_Website.Pages.RemoveUserModel
+@{
+    ViewData["Title"] = "Remove User";
+}
+
+<section class="p-5">
+    <header class="bg-white shadow-sm p-4 rounded-3 mb-4">
+        <h1 class="h3 fw-bold text-dark mb-0">Remove User</h1>
+    </header>
+
+    @if (!string.IsNullOrEmpty(Model.Message))
+    {
+        <div class="alert @(Model.IsSuccess ? "alert-success" : "alert-danger")">
+            @Model.Message
+        </div>
+    }
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Table</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var u in Model.Users)
+            {
+                <tr>
+                    <td>@u.Name</td>
+                    <td>@u.Email</td>
+                    <td>@u.Phone</td>
+                    <td>@u.Table</td>
+                    <td>
+                        @if (u.Table == "Admin")
+                        {
+                            <span class="text-muted">Protected</span>
+                        }
+                        else
+                        {
+                            <form method="post" asp-page-handler="Delete">
+                                <input type="hidden" name="userId" value="@u.Id" />
+                                <input type="hidden" name="tableName" value="@u.Table" />
+                                <button class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Delete this user?');">
+                                    Delete
+                                </button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

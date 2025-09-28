@@ -1,0 +1,111 @@
+﻿@page
+@model Donation_Website.Pages.AdminDashboardModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+    var userName = Model.HttpContext.Session.GetString("UserName");
+}
+
+<section class="min-vh-100 bg-light p-4">
+    <!-- Header -->
+    <header class="bg-white shadow-sm p-4 rounded-3 mb-4">
+        <div class="text-center">
+            <h1 class="h3 fw-bold text-dark mb-0">Admin Dashboard</h1>
+            <div class="gap-3">
+                <span class="text-muted text-center display-6">Hello, <strong>@userName</strong></span>
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview -->
+    <div class="bg-white shadow-sm rounded-3 p-4 mb-5">
+        <h2 class="h4 fw-semibold text-dark mb-3">System Overview</h2>
+        <p class="text-muted lh-base">
+            From here, you can manage users, monitor events, track volunteers, and maintain overall system control.
+        </p>
+    </div>
+
+    <!-- Feature Grid -->
+    <div class="row g-4">
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 border-0" style="background-color: #dbeafe;">
+                <div class="card-body">
+                    <h5 class="card-title">User Role Management</h5>
+                    <p class="card-text text-dark">Assign, modify, or remove user roles.</p>
+                    <button class="btn btn-primary" onclick="location.href='@Url.Page("/ManageRoles")'">Manage Roles</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 border-0" style="background-color: #dcfce7;">
+                <div class="card-body">
+                    <h5 class="card-title">Event Management</h5>
+                    <p class="card-text text-dark">Create, edit, turn on/off, or remove events.</p>
+                    <button onclick="location.href='@Url.Page("/ManageEvents")'" class="btn btn-success">Manage Events</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 border-0" style="background-color: #fee2e2;">
+                <div class="card-body">
+                    <h5 class="card-title">Remove User</h5>
+                    <p class="card-text text-dark">Remove users if necessary.</p>
+                    <button onclick="location.href='@Url.Page("/RemoveUser")'" class="btn btn-danger">Remove</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 border-0" style="background-color: #fef3c7;">
+                <div class="card-body">
+                    <h5 class="card-title">Donor Monitoring</h5>
+                    <p class="card-text text-dark">Track donor accounts and activity.</p>
+                    <button onclick="location.href='@Url.Page("/Monitor")'" class="btn btn-warning">Monitor</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 border-0" style="background-color: #f3e8ff;">
+                <div class="card-body">
+                    <h5 class="card-title">Volunteer Verification</h5>
+                    <p class="card-text text-dark">Verify and track volunteer activities.</p>
+                    <button onclick="location.href='@Url.Page("/Verify")'" class="btn" style="background-color: #8b5cf6; color: white;">Verify</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 border-0" style="background-color: #e0e7ff;">
+                <div class="card-body">
+                    <h5 class="card-title">View Lists</h5>
+                    <p class="card-text text-dark">View volunteer, organization, and event lists.</p>
+                    <button onclick="location.href='@Url.Page("/ViewLists")'" class="btn btn-secondary" style="background-color: #6366f1;">View</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 border-0" style="background-color: #ccfbf1;">
+                <div class="card-body">
+                    <h5 class="card-title">Audit Log</h5>
+                    <p class="card-text text-dark">Track all activities and system logs.</p>
+                    <button onclick="location.href='@Url.Page("/Logs")'" class="btn btn-info">Logs</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100 border-0" style="background-color: #fce7f3;">
+                <div class="card-body">
+                    <h5 class="card-title">Fraud Detection</h5>
+                    <p class="card-text text-dark">Monitor and detect fraudulent activity.</p>
+                    <button onclick="location.href='@Url.Page("/Detect")'" class="btn" style="background-color: #ec4899; color: white;">Detect</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

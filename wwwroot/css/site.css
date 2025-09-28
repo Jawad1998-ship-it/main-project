@@ -1,0 +1,708 @@
+:root {
+    --nav-text: #FFD700;
+    --login-card: #002C54;
+    --home-hero: linear-gradient(86deg, #C7032A, #610119);
+    --old-qoute: #1c1515;
+    --old-story: #ffffffd3;
+    --orphan-qou: #090202;
+    --orphan-blogs: #D9D9D9;
+    --aid-reason: #000000;
+    --aid-solution: #DCDDEC;
+}
+
+*{
+    scroll-behavior:smooth;
+    box-sizing:border-box;
+}
+.text-justify{
+        text-align:justify;
+}
+
+nav{
+    background-color:#9c0a0a ;
+}
+.nav-link, .navbar-brand{
+    color:var(--nav-text) !important;
+}
+.hero-home {
+    background: var(--home-hero);
+    min-height: 80vh;
+    padding: 60px 30px;
+    align-items: center;
+}
+
+    .hero-home .title {
+        font-size: 3rem; /* responsive */
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .hero-home .hero-description {
+        font-size: 1rem;
+        line-height: 1.7;
+        font-weight: 400;
+        text-align: justify;
+        max-height: 450px; /* optional, keeps hero tidy */
+        overflow-y: auto;
+    }
+
+.hero-buttons .btn {
+    font-size: 1rem;
+    padding: 12px 25px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+    .hero-buttons .btn:hover {
+        background-color: #ffd700;
+        color: #970747;
+    }
+
+.hero-img img {
+    border: 7px solid white;
+    border-radius: 15px;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Table gradient + hover effects (existing) */
+.animated-donation-table {
+    border-radius: 1rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientGlow 10s ease infinite;
+}
+
+.donor-row {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+    .donor-row:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+.rank-cell {
+    font-weight: bold;
+    color: #ff5733;
+}
+
+.name-cell {
+    font-weight: 500;
+    color: #34495e;
+}
+
+.amount-cell {
+    font-weight: bold;
+    color: #27ae60;
+}
+
+@keyframes gradientGlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Floating coins */
+.floating-coins {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 100px;
+    pointer-events: none; /* so clicks pass through */
+    overflow: visible;
+    z-index: 10;
+}
+
+    .floating-coins .coin {
+        position: absolute;
+        font-size: 1.5rem;
+        animation: floatCoin linear infinite;
+        opacity: 0.8;
+    }
+
+        /* Different random positions and delays */
+        .floating-coins .coin:nth-child(1) {
+            left: 10%;
+            animation-duration: 4s;
+            animation-delay: 0s;
+        }
+
+        .floating-coins .coin:nth-child(2) {
+            left: 30%;
+            animation-duration: 5s;
+            animation-delay: 1s;
+        }
+
+        .floating-coins .coin:nth-child(3) {
+            left: 50%;
+            animation-duration: 6s;
+            animation-delay: 0.5s;
+        }
+
+        .floating-coins .coin:nth-child(4) {
+            left: 70%;
+            animation-duration: 4.5s;
+            animation-delay: 0.7s;
+        }
+
+        .floating-coins .coin:nth-child(5) {
+            left: 90%;
+            animation-duration: 5.5s;
+            animation-delay: 1.2s;
+        }
+
+@keyframes floatCoin {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translateY(-60px) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.8;
+    }
+}
+
+
+.event-card {
+    border-radius: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
+}
+
+    .event-card:hover {
+        transform: translateY(-10px) scale(1.03);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+    }
+
+.card-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+    .card-icon:hover {
+        transform: scale(1.2);
+    }
+
+.card-title {
+    color: #222;
+}
+
+.card-text {
+    font-size: 0.95rem;
+}
+
+
+/* Comment Section */
+.comment-section .card {
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+    .comment-section .card:hover {
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    }
+
+.comment-section .rounded-circle {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.comment-section .btn-sm {
+    font-size: 0.8rem;
+}
+/*<!--Old Aid page-->*/
+.Old-hero {
+    display: flex;
+    align-items: center;
+    position: relative;
+    background-image: url('/Assets/old1.jpg');
+    background-size: cover;
+    background-position: top;
+    background-attachment: fixed; 
+    min-height: 90vh;
+}
+
+/* Styling for the Quotes section */
+.Old-qoute {
+    background: var(--old-qoute);
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+}
+
+/* Styling for the Stories section */
+.Old-story {
+    background: var(--old-story);
+}
+
+    .Old-story .card {
+        border-radius: 1rem;
+        border: none;
+    }
+
+    .Old-story .card-img-top {
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .Old-story .btn {
+        background-color: #6c757d; /* A neutral color for the button */
+        border: none;
+    }
+
+        .Old-story .btn:hover {
+            background-color: #495057;
+        }
+.orphan-home {
+    background: url('/Assets/Orphan-bg.jpg') no-repeat top center;
+    background-size: cover;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+.orphan-qou {
+    background: var(--orphan-qou);
+    padding: 60px 0;
+}
+
+.orphan-blogs {
+    background: var(--orphan-blogs);
+    padding: 60px 0;
+}
+
+    .orphan-blogs .card img {
+        height: 200px;
+        object-fit: cover;
+    }
+
+.aid-Rea {
+    background: var(--aid-reason);
+    padding: 60px 0;
+}
+
+.aid-hero .card img {
+    height: 220px;
+    object-fit: cover;
+}
+
+.aid-sol\&Don {
+    background: var(--aid-solution);
+    padding: 60px 0;
+}
+
+    .aid-sol\&Don .card {
+        border-radius: 12px;
+    }
+
+    .aid-sol\&Don .btn {
+        margin-top: 10px;
+    }
+/*<!--Zakat page-- >*/
+#hero-zakat {
+    background: linear-gradient(to right, #2c7761, #51a681);
+}
+#zakat-calc .zakat-card {
+    background: #372338;
+    border: 3px solid transparent;
+    border-image: linear-gradient(to right, #bd1b77, #931899) 1;
+}
+
+#zakat-calc .form-control {
+    background-color: #5d5d85;
+    border: none;
+    color: white;
+}
+
+    #zakat-calc .form-control::placeholder {
+        color: #b0b0b0;
+    }
+
+#zakat-calc .zakat-result-box {
+    background-color: #931899;
+}
+/*<!--Eid / Ramadan Page-- >*/
+#eid-ramadan-hero {
+    position: relative;
+    background-image: url('/Assets/Ramadan.png');
+    background-size: cover;
+    background-position: top;
+    background-attachment: fixed; /* Optional: for parallax effect */
+    min-height: 80vh;
+}
+
+#eid-ramadan-hero .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+#donation-types .card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    #donation-types .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    }
+
+    #donation-types .card i {
+        color: #4CAF50; /* Adjust icon color as needed */
+    }
+/*<!--Gaza Section-- >*/
+#hero-gaza {
+    position: relative;
+    background-image: url('/Assets/gazaT1.png'); 
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+}
+/* About Section */
+.about-section {
+    margin-top: 40px;
+    background: linear-gradient(135deg, #5BC2B3, #2196f3);
+    border-radius: 0 0 50px 50px;
+    padding: 50px 15px;
+}
+
+/* Team Cards */
+.team-card {
+    background-color: #002C54;
+    max-width:200px;
+    color: #fff;
+    border-radius: 20px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .team-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+.team-img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+/* Work Slider */
+.work-slider {
+    overflow: hidden;
+    position: relative;
+}
+
+.slider-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    max-height:600px;
+    overflow: hidden;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.6s ease-in-out;
+}
+
+.slide {
+    flex: 0 0 33.33%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+    .slide img {
+        width: 80%;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        transition: transform 0.6s ease;
+    }
+
+    .slide.active img {
+        transform: scale(1.2);
+        z-index: 2;
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+}
+/*<!--Signup part-->*/
+.left-panel {
+    background-color: #007bff;
+    color: #fff;
+    position: relative;
+}
+
+.right-panel {
+    background-color: #6a1b9a;
+    color: #fff;
+}
+
+.btn-signin {
+    background: #e91e63;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 30px;
+    font-weight: 600;
+    color: #fff;
+    transition: 0.3s;
+}
+
+    .btn-signin:hover {
+        background: #d81b60;
+    }
+
+.btn-signup {
+    background: #f1f1f1;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 30px;
+    font-weight: 700;
+    color: #000;
+    transition: 0.3s;
+}
+
+    .btn-signup:hover {
+        background: #ddd;
+    }
+
+/*Timeline*/
+.timeline {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.timeline-item {
+    flex: 1;
+    max-width: 180px;
+    position: relative;
+}
+
+.timeline-circle {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 10px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: #fff;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    transition: transform 0.3s, font-size 0.3s;
+}
+
+    .timeline-circle.active {
+        width: 100px;
+        height: 100px;
+        font-size: 38px;
+        transform: scale(1.15);
+        border: 5px solid #222;
+        box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+
+.timeline-arrow {
+    width: 100%;
+    height: 6px;
+    margin: 10px 0;
+}
+/* Stage Colors */
+.silver {
+    background: #6c757d;
+}
+
+.gold {
+    background: #ffc107;
+}
+
+.platinum {
+    background: #adb5bd;
+}
+
+.diamond {
+    background: #0dcaf0;
+}
+
+.emerald {
+    background: #198754;
+}
+
+.ruby {
+    background: #dc3545;
+}
+
+.crown {
+    background: #343a40;
+}
+/* CSS-only modal using :target */
+.modal-target {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display: none;
+    z-index: 1050;
+    padding: 1rem;
+    overflow: auto;
+}
+
+.modal-card {
+    max-width: 520px;
+    margin: 5rem auto;
+    background: #fff;
+    border-radius: 1rem;
+    box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,.2);
+    border: 0;
+}
+
+.modal-header, .modal-footer {
+    padding: 1rem 1.25rem;
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0,0,0,.08);
+}
+
+.modal-body {
+    padding: 1rem 1.25rem;
+}
+
+.close-link {
+    text-decoration: none;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+    .close-link:hover {
+        color: #000;
+    }
+/* show modal when targeted */
+.modal-target:target {
+    display: block;
+}
+/* accessibility improvement: focus ring for anchor-as-button */
+a.btn:focus, .btn:focus {
+    outline: 2px solid #86b7fe;
+    outline-offset: 2px;
+}
+/* Shapes */
+.shape-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #4CAF50;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.shape-star-top {
+    color: red;
+    font-size: 60px;
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+
+.shape-star-bottom {
+    color: orange;
+    font-size: 60px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+}
+
+.shape-triangle {
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-top: 70px solid #00bcd4;
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+}
+.login-card{
+    background: var(--login-card);
+}
+    .login-card .card-title {
+        color: #FFFFFF;
+    }
+    .login-card .btn {
+        background-color: #D0FFFE;
+    }
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+  color: var(--bs-secondary-color);
+  text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+  text-align: start;
+}

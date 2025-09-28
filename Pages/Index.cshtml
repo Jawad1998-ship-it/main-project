@@ -1,0 +1,283 @@
+﻿@page
+@model Donation_Website.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home";
+    string selectedAttr(int id) => id == Model.SelectedFundraiserId ? "selected" : "";
+
+}
+
+<section class="d-flex flex-wrap justify-content-between align-items-center p-5 text-white hero-home gap-4">
+    <div class="hero-text col-lg-6 col-md-12 px-3">
+        <h1 class="text-wrap title">Helping Hands are better than Praying lips</h1>
+        <h4 class="fw-light hero-description">
+            Every year, countless people around us struggle in silence. Some lose everything in floods, cyclones, or earthquakes. Some suffer from accidents, fire, or poverty. Many orphans grow up without love and support, while elderly people in old homes wait for someone to visit, someone to care. During Eid and Ramadan, when joy should fill every home, millions still go to sleep hungry, without new clothes, without a smile.
+
+            We believe that humanity is the greatest strength. We are creating a website where every person can extend a helping hand, no matter how small. Because together, small efforts can create big changes.
+        </h4>
+
+    </div>
+    <div class="hero-img col-lg-5 col-md-12 text-center mt-4 mt-lg-0">
+        <img class="img-fluid rounded-4 shadow-lg" src="~/Assets/Hero.jpg" alt="Hero Image">
+    </div>
+</section>
+
+<div id="fundraiserCarousel" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="2000">
+    <div class="carousel-inner">
+        @for (int i = 0; i < Model.Fundraisers.Count; i++)
+        {
+            var f = Model.Fundraisers[i];
+            var totalCollected = ViewData[$"Collected_{f.FundraiserId}"] != null ? (decimal)ViewData[$"Collected_{f.FundraiserId}"] : 0m;
+            var percentage = ViewData[$"Percentage_{f.FundraiserId}"] != null ? (int)ViewData[$"Percentage_{f.FundraiserId}"] : 0;
+
+            <div class="carousel-item @(i == 0 ? "active" : "")">
+                <div class="card p-4 shadow-lg mx-auto" style="max-width: 600px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title fw-bold">@f.Title</h5>
+                        <div class="progress progress-lg rounded-pill mx-auto my-3" style="height: 30px;">
+                            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated rounded-pill"
+                                 role="progressbar"
+                                 style="width:@percentage%;"
+                                 aria-valuenow="@percentage"
+                                 aria-valuemin="0"
+                                 aria-valuemax="100">
+                                @percentage%
+                            </div>
+                        </div>
+                        <p class="fs-6">
+                            Collected: <strong>৳@totalCollected</strong> of ৳@f.TargetAmount
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#fundraiserCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#fundraiserCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+
+
+
+<section class="p-5 bg-light text-center position-relative">
+    <div class="container">
+        <h2 class="mb-4 fw-bold">Top Donors</h2>
+
+        <div class="floating-coins">
+            <span class="coin">💰</span>
+            <span class="coin">🪙</span>
+            <span class="coin">💵</span>
+            <span class="coin">💰</span>
+            <span class="coin">🪙</span>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-hover shadow-sm mx-auto animated-donation-table" style="max-width:700px;">
+                <thead class="table-dark text-center">
+                    <tr>
+                        <th scope="col">Rank</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Total Donation (৳)</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @if (Model.TopDonors != null)
+                    {
+                        int rank = 1;
+                        foreach (var donor in Model.TopDonors)
+                        {
+                            <tr class="donor-row">
+                                <td class="rank-cell">@rank</td>
+                                <td class="name-cell">@donor.DonorName</td>
+                                <td class="amount-cell">৳@donor.TotalDonation.ToString("N2")</td>
+                            </tr>
+                            rank++;
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+<section class="p-5 bg-secondary bg-opacity-25">
+    <h1 class="text-center pb-4 fw-bold">Events</h1>
+    <div class="container text-center">
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4 col-sm-6">
+                <a asp-page="/Orphanage" class="text-decoration-none">
+                    <div class="card p-4 shadow-lg h-100 event-card position-relative overflow-hidden">
+                        <div class="card-icon bg-warning text-white rounded-circle mb-3 mx-auto">
+                            👶
+                        </div>
+                        <h5 class="card-title fw-bold">Orphans</h5>
+                        <p class="card-text text-muted">Support children in need.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <a asp-page="/OldHomeAid" class="text-decoration-none">
+                    <div class="card p-4 shadow-lg h-100 event-card position-relative overflow-hidden">
+                        <div class="card-icon bg-info text-white rounded-circle mb-3 mx-auto">
+                            👴
+                        </div>
+                        <h5 class="card-title fw-bold">Old Age People</h5>
+                        <p class="card-text text-muted">Care for the elderly.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <a asp-page="/Zakat" class="text-decoration-none">
+                    <div class="card p-4 shadow-lg h-100 event-card position-relative overflow-hidden">
+                        <div class="card-icon bg-success text-white rounded-circle mb-3 mx-auto">
+                            💰
+                        </div>
+                        <h5 class="card-title fw-bold">Zakat</h5>
+                        <p class="card-text text-muted">It’s your responsibility.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <a asp-page="/Eid" class="text-decoration-none">
+                    <div class="card p-4 shadow-lg h-100 event-card position-relative overflow-hidden">
+                        <div class="card-icon bg-danger text-white rounded-circle mb-3 mx-auto">
+                            🎉
+                        </div>
+                        <h5 class="card-title fw-bold">Eid & Ramadan</h5>
+                        <p class="card-text text-muted">Help the poor people.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <a asp-page="/WaterAid" class="text-decoration-none">
+                    <div class="card p-4 shadow-lg h-100 event-card position-relative overflow-hidden">
+                        <div class="card-icon bg-primary text-white rounded-circle mb-3 mx-auto">
+                            💧
+                        </div>
+                        <h5 class="card-title fw-bold">Water Aid</h5>
+                        <p class="card-text text-muted">Come forward for the flood affected people.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <a asp-page="/Gaza" class="text-decoration-none">
+                    <div class="card p-4 shadow-lg h-100 event-card position-relative overflow-hidden">
+                        <div class="card-icon bg-secondary text-white rounded-circle mb-3 mx-auto">
+                            🌍
+                        </div>
+                        <h5 class="card-title fw-bold">For Gaza</h5>
+                        <p class="card-text text-muted">Help the people of Gaza during extreme hardship.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="comment-section py-5 mx-auto" style="max-width:860px;">
+    <div class="container">
+        <h2 class="mb-4 text-center">Comments</h2>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <form method="post" asp-page-handler="AddComment">
+                    <!-- Fundraiser Dropdown -->
+                    <div class="mb-3">
+                        <label for="commentFundraiser" class="form-label">Select Project / Event</label>
+                        <select class="form-control" id="commentFundraiser" name="SelectedFundraiserId" required>
+                            <option value="">-- Select Event --</option>
+                            @foreach (var f in Model.Fundraisers)
+                            {
+                                if (f.FundraiserId == Model.SelectedFundraiserId)
+                                {
+                                    <option value="@f.FundraiserId" selected="selected">@f.Title</option>
+                                }
+                                else
+                                {
+                                    <option value="@f.FundraiserId">@f.Title</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+
+                    <!-- Name -->
+                    <div class="mb-3">
+                        <label for="commentName" class="form-label">Name</label>
+                        <input type="text" class="form-control" id="commentName" name="CommentName" placeholder="Your Name">
+                    </div>
+
+                    <!-- Rating -->
+                    <div class="mb-3">
+                        <label for="commentRating" class="form-label">Rating</label>
+                        <select class="form-control" id="commentRating" name="Rating" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+
+                    <!-- Comment Content -->
+                    <div class="mb-3">
+                        <label for="commentContent" class="form-label">Comment</label>
+                        <textarea class="form-control" id="commentContent" name="CommentContent" rows="3" placeholder="Your Comment" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Post Comment</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Display Comments -->
+        <div class="comments-list">
+            @foreach (var comment in Model.Comments)
+            {
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title mb-0">@comment.UserName</h5>
+                            <small class="text-muted">@comment.Date.ToString("MMMM dd, yyyy")</small>
+                        </div>
+
+                        <div class="mb-2">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= comment.Rating)
+                                {
+                                    <span class="text-warning">★</span>
+                                }
+                                else
+                                {
+                                    <span class="text-secondary">☆</span>
+                                }
+                            }
+                        </div>
+
+                        <p><strong>Event:</strong> @comment.ProjectTitle</p> 
+
+                        <p class="card-text">@comment.Comment</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</section>
+
+
+<script>
+    setInterval(function(){
+        location.reload();
+    }, 120000); // refresh every 20 minutes
+</script>

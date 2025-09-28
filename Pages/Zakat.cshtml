@@ -1,0 +1,73 @@
+﻿@page
+@model Donation_Website.Pages.ZakatModel
+@{
+    ViewData["Title"] = "Zakat";
+}
+
+<!-- Hero Section -->
+<section class="hero-section bg-light py-5 mb-5 " id="hero-zakat">
+    <div class="row-cols-auto">
+        <div class="d-flex justify-content-evenly align-items-center">
+            <div class="col-lg-6 p-3 mx-4">
+                <h1 class="display-4 fw-bold mb-3">Zakat</h1>
+                <p class="lead text-muted mb-4">
+                    Fulfill your religious obligation effortlessly. Our simple calculator helps you determine the exact amount of Zakat due on your wealth, ensuring compliance with Islamic principles.
+                </p>
+            </div>
+            <div class="col-lg-6 text-center mx-4">
+                <img src="/Assets/Zakat2.png" class=" img-fluid rounded shadow" alt="Zakat Hero Image" style="max-height: 400px; object-fit: cover;" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Zakat Calculator Section -->
+<section id="zakat-calc" class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="zakat-card p-4 rounded-3 text-center text-white">
+                <form method="post">
+                    <p class="fs-5 fw-bold mb-4">
+                        Your zakat is calculated by one year cycle with 2.5% total valuation
+                    </p>
+
+                    <div class="row g-4 justify-content-center mb-4">
+                        <div class="col-lg-5">
+                            <label asp-for="Money" class="form-label fs-6 fw-bold"></label>
+                            <input asp-for="Money" class="form-control" placeholder="Enter amount" />
+                            <span asp-validation-for="Money" class="text-warning"></span>
+                        </div>
+                        <div class="col-lg-5">
+                            <label asp-for="Property" class="form-label fs-6 fw-bold"></label>
+                            <input asp-for="Property" class="form-control" placeholder="Enter amount" />
+                            <span asp-validation-for="Property" class="text-warning"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4 justify-content-center">
+                        <div class="col-lg-6">
+                            <button type="submit" class="btn btn-light btn-lg w-100 fw-bold">Calculate & Donate</button>
+                        </div>
+                    </div>
+                </form>
+
+                @if (Model.ZakatAmount > 0)
+                {
+                    <div class="row mt-4 justify-content-center">
+                        <div class="col-lg-6">
+                            <label class="form-label fs-6 fw-bold">Your Zakat:</label>
+                            <input type="text" class="form-control form-control-lg text-center fw-bold"
+                                   value="@Model.ZakatAmount.ToString("0.00")" readonly />
+
+                            <a asp-page="/Donation" asp-route-fundraiserId="3" asp-route-amount="@Model.ZakatAmount" class="btn btn-warning btn-lg w-100 fw-bold mt-3">Now Donate</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
