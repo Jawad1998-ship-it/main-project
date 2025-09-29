@@ -92,10 +92,28 @@ namespace Donation_Website.Pages
                 paymentMethod = "Mobile"; // default
             }
 
+            int donationId;
+            using (var donationCmd = _db.GetQuery(@"
+        INSERT INTO Donation (DonorID, CartID, FundraiserID, Amount, Status, Date)
+        OUTPUT INSERTED.DonationID
+        VALUES (@DonorID, @CartID, @FundraiserID, @Amount, 'Pending', GETDATE());
+    "))
+            {
+                donationCmd.Parameters.AddWithValue("@DonorID", donorId);
+                donationCmd.Parameters.AddWithValue("@CartID", cartId);
+                donationCmd.Parameters.AddWithValue("@FundraiserID", FundraiserId);
+                donationCmd.Parameters.AddWithValue("@Amount", Amount);
+
+                donationCmd.Connection.Open();
+                donationId = (int)donationCmd.ExecuteScalar();
+                donationCmd.Connection.Close();
+            }
+
 
             int paymentId;
             using (var paymentCmd = _db.GetQuery(@"
                             INSERT INTO Payment (
+                                DonationID,
                                 Amount,
                                 PaymentMethod,
                                 PaymentStatus,
@@ -106,6 +124,7 @@ namespace Donation_Website.Pages
                                 UpdatedAt
                             )
                             VALUES (
+                                @DonationID,
                                 @Amount,
                                 @PaymentMethod,
                                 'Pending',
@@ -118,6 +137,7 @@ namespace Donation_Website.Pages
                             SELECT SCOPE_IDENTITY(); 
 "))
             {
+                paymentCmd.Parameters.AddWithValue("@DonationID", donationId);
                 paymentCmd.Parameters.AddWithValue("@Amount", Amount);
                 paymentCmd.Parameters.AddWithValue("@PaymentMethod", paymentMethod);
                 paymentCmd.Parameters.AddWithValue("@Name", name);
@@ -128,7 +148,7 @@ namespace Donation_Website.Pages
                 paymentCmd.Connection.Close();
             }
 
-            return RedirectToPage("/cart", new { paymentId = paymentId, FundraiserId = FundraiserId, Amount=Amount});
+            return RedirectToPage("/cart", new { paymentId = paymentId, FundraiserId = FundraiserId, Amount = Amount });
 
 
         }

@@ -33,7 +33,7 @@ namespace Donation_Website.Pages
             int donorId = GetDonorId();
 
             string query = @"
-                SELECT ci.CartItemsId, ci.CartId, ci.Amount,
+                SELECT ci.CartItemId, ci.CartId, ci.Amount,
                        f.FundraiserID, f.Title AS EventName, ci.CreatedAt
                         FROM CartItems ci
                         INNER JOIN Cart c ON ci.CartId = c.CartID
@@ -52,7 +52,7 @@ namespace Donation_Website.Pages
                     {
                         Donations.Add(new DonationViewModel
                         {
-                            CartItemsId = reader.GetInt32(reader.GetOrdinal("CartItemsId")),
+                            CartItemId = reader.GetInt32(reader.GetOrdinal("CartItemId")),
                             CartId = reader.GetInt32(reader.GetOrdinal("CartId")),
                             FundraiserId = reader.GetInt32(reader.GetOrdinal("FundraiserID")),
                             EventName = reader.GetString(reader.GetOrdinal("EventName")),
@@ -224,10 +224,10 @@ namespace Donation_Website.Pages
                             updatePaymentCmd.Connection.Close();
                         }
                     }
- 
-                          
 
-                    if(FundraiserId != null)
+
+
+                    if (FundraiserId != null)
                     {
                         using (var donationCmd = _db.GetQuery(@"
                                     INSERT INTO Donation (                                    
@@ -279,7 +279,7 @@ namespace Donation_Website.Pages
                 }
 
 
-                    TempData["Success"] = "Donation completed and payments updated successfully!";
+                TempData["Success"] = "Donation completed and payments updated successfully!";
             }
             catch (Exception ex)
             {
@@ -288,19 +288,19 @@ namespace Donation_Website.Pages
 
             return RedirectToPage("/cart");
         }
-    
 
 
-        public IActionResult OnPostRemove(int cartItemsId)
+
+        public IActionResult OnPostRemove(int cartItemId)
         {
             int donorId = GetDonorId();
             using (var cmd = _db.GetQuery(@"
                 DELETE FROM CartItems 
-                WHERE CartItemsId = @CartItemsId 
+                WHERE CartItemId = @CartItemId 
                   AND CartId IN (SELECT CartID FROM Cart WHERE DonorID=@DonorID)
             "))
             {
-                cmd.Parameters.AddWithValue("@CartItemsId", cartItemsId);
+                cmd.Parameters.AddWithValue("@CartItemId", cartItemId);
                 cmd.Parameters.AddWithValue("@DonorID", donorId);
                 cmd.Connection.Open();
                 cmd.ExecuteNonQuery();

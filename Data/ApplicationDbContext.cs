@@ -60,7 +60,7 @@ namespace Donation_Website.Data
             b.Entity<Payment>()
                 .HasOne(p => p.Donation)
                 .WithMany(d => d.Payments)
-                .HasForeignKey(p => p.DonationId)
+                .HasForeignKey(p => p.DonationID)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // Review: one per donor per project

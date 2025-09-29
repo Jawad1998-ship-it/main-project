@@ -5,7 +5,7 @@ namespace Donation_Website.Models
     public class CartItem
     {
         
-            public int CartItemsId { get; set; }
+            public int CartItemId { get; set; }
             public int CartID { get; set; }
             public int FundraiserID { get; set; }
             public decimal? Amount { get; set; }

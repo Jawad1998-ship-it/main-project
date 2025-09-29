@@ -124,11 +124,11 @@ namespace Donation_Website.Migrations
 
             modelBuilder.Entity("Donation_Website.Data.Donation", b =>
                 {
-                    b.Property<int>("DonationId")
+                    b.Property<int>("DonationID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DonationId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DonationID"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
@@ -145,7 +145,7 @@ namespace Donation_Website.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.HasKey("DonationId");
+                    b.HasKey("DonationID");
 
                     b.HasIndex("CartId");
 

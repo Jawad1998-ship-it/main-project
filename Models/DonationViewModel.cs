@@ -2,7 +2,7 @@
 {
     public class DonationViewModel
     {
-        public int CartItemsId { get; set; }
+        public int CartItemId { get; set; }
         public int CartId { get; set; }
         public int FundraiserId { get; set; }
         public string EventName { get; set; }

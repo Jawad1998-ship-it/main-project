@@ -22,7 +22,7 @@
                         {
                             @foreach (var donation in Model.Donations)
                             {
-                                <div class="row mb-4 donation-item" data-cart-item-id="@donation.CartItemsId">
+                                <div class="row mb-4 donation-item" data-cart-item-id="@donation.CartItemId">
                                     <div class="col-lg-3 col-md-12 mb-3">
                                         <img src="/images/default.jpg" class="w-100 rounded" alt="Donation Event" />
                                     </div>
@@ -32,7 +32,7 @@
                                         <p>Amount: @(donation.Amount.HasValue ? $"BDT{donation.Amount.Value:0.00}" : "BDT0.00")</p>
                                         <p>Date: <span class="text-muted">@donation.Date.ToString("yyyy-MM-dd hh:mm tt")</span></p>
                                         <!-- Actions -->
-                                        <button class="btn btn-sm btn-danger deleteBtn" data-cart-item-id="@donation.CartItemsId">
+                                        <button class="btn btn-sm btn-danger deleteBtn" data-cart-item-id="@donation.CartItemId">
                                             <i class="fas fa-trash"></i> Delete
                                         </button>
                                     </div>
@@ -80,7 +80,7 @@
                         <form method="post" asp-page-handler="Checkout">
                             <input type="hidden" asp-for="APaymentId" />
                             <input type="hidden" asp-for="FundraiserId" />
-                            <input type="hidden" asp-for="Amount"/>
+                            <input type="hidden" asp-for="Amount" />
                             <h6 class="mb-3">Payment Method</h6>
                             <div class="form-check mb-2">
                                 <input class="form-check-input" type="radio" name="paymentMethod" id="mobilePay" value="Mobile" checked />

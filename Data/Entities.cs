@@ -84,7 +84,7 @@ namespace Donation_Website.Data
 
     public class Donation  // finalized at checkout
     {
-        public int DonationId { get; set; }
+        public int DonationID { get; set; }
         public int UserId { get; set; }            // Donor
         public User User { get; set; } = default!;
         public int FundraiserId { get; set; }
@@ -100,7 +100,7 @@ namespace Donation_Website.Data
     public class Payment  // multiple attempts per donation
     {
         public int PaymentId { get; set; }
-        public int DonationId { get; set; }
+        public int DonationID { get; set; }
         public Donation Donation { get; set; } = default!;
         public decimal Amount { get; set; }
         public string Status { get; set; } = "Pending"; // Pending|Succeeded|Failed|Refunded
