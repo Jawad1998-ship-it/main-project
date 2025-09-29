@@ -1,7 +1,6 @@
 ﻿using Donation_Website.Data;
 using Donation_Website.Models;
 using Microsoft.EntityFrameworkCore;
-using Donation_Website;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,10 +24,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-// Register your custom services
-builder.Services.AddScoped<DBConnection>();
-builder.Services.AddScoped<Users>(); // Add this line
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,7 +38,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthorization();
-app.UseSession();
+app.UseSession(); 
 
 app.MapRazorPages();
 

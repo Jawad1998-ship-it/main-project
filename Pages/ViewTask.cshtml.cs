@@ -11,20 +11,15 @@ namespace Donation_Website.Pages
 
         public void OnGet()
         {
-            var email = HttpContext.Session.GetString("UserEmail");
-            if (string.IsNullOrEmpty(email)) return;
-
             string sql = @"
                 SELECT VA.AssignID, VA.RoleTask, VA.Status, VA.AssignDate, VA.Hours,
-                       P.Title AS ProjectTitle, W.Title AS WorkTitle
+                       P.Title AS ProjectTitle, W.Title AS WorkTitle, V.Name AS VolunteerName
                 FROM VolunteerAssignment VA
                 JOIN Volunteer V ON V.VolunteerID = VA.VolunteerID
                 JOIN Project P ON P.ProjectID = VA.ProjectID
-                JOIN WorkOfOrganization W ON W.WorkID = VA.WorkID
-                WHERE V.Email=@Email";
+                JOIN WorkOfOrganization W ON W.WorkID = VA.WorkID";
 
             using var cmd = _db.GetQuery(sql);
-            cmd.Parameters.AddWithValue("@Email", email);
             cmd.Connection.Open();
             using var r = cmd.ExecuteReader();
             while (r.Read())
@@ -37,7 +32,8 @@ namespace Donation_Website.Pages
                     AssignDate = Convert.ToDateTime(r["AssignDate"]),
                     Hours = (int)(r["Hours"] ?? 0),
                     ProjectTitle = r["ProjectTitle"].ToString()!,
-                    WorkTitle = r["WorkTitle"].ToString()!
+                    WorkTitle = r["WorkTitle"].ToString()!,
+                    VolunteerName = r["VolunteerName"].ToString()!
                 });
             }
         }
