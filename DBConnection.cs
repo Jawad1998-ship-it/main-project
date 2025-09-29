@@ -8,14 +8,18 @@ namespace Donation_Website
         private const string connectionString = @"Server=TOKEY-ZAWAD\SQLEXPRESS;Database=DonationManagementDB;Integrated Security=True;Encrypt=False;TrustServerCertificate=True;";
 
         public SqlCommand GetQuery(string query)
-            {
-                var connection = new SqlConnection(connectionString);
-                SqlCommand cmd = new SqlCommand(query, connection);
+        {
+            var connection = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(query, connection);
 
-                return cmd;
-            }
+            return cmd;
+        }
+        public SqlConnection GetConnection()
+        {
+            return new SqlConnection(connectionString);
+        }
 
-        
+
 
     }
 }
